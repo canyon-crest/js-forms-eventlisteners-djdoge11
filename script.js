@@ -69,8 +69,11 @@ document.getElementById("btnCalc").addEventListener('click', function(){
         price = price + 3;
     }
     
-    let name = document.getElementById("myInput");
-    myPara.innerHTML = name+", your total is $"+price.toFixed(2);
+    let name = document.getElementById("myInput").value;
+    if (name === "") {
+        name = "Customer";
+    }
+    myPara.innerHTML = (name +", your total is $"+price.toFixed(2));
 })
 //   a) Get the selected size price:
 //      Use document.getElementsByName("rg") to get all
@@ -111,3 +114,14 @@ document.getElementById("btnCalc").addEventListener('click', function(){
 //         c) Uncheck ALL topping checkboxes (loop through them)
 //         d) Set the service dropdown value to "dinein"
 //         e) Set the output paragraph innerHTML to ""
+document.getElementById("clearBtn").addEventListener('click', function() {
+    document.getElementById("myInput").value = "";
+    document.getElementById("r3").checked = true;
+
+    const toppings = document.getElementsByName("cb");
+    for (let i = 0; i < toppings.length; i++) {
+        toppings[i].checked = false;
+    }
+    document.getElementById("serviceSelect").value = "dinein";
+    document.getElementById("myPara").innerHTML = "";
+});
