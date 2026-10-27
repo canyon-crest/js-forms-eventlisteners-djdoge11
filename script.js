@@ -17,7 +17,9 @@
 
 // STEP 1: Get the "Shout" button by its ID ("btnShout")
 //         using document.getElementById()
-
+let shout = document.getElementById("btnShout").addEventListener('click', function(){
+outShout.innerHTML = shoutInput.value.toUpperCase() + "!";    
+});
 // STEP 2: Add a click event listener to the button.
 //         Inside the listener function:
 //         a) Get the text from the input with ID "shoutInput"
@@ -26,7 +28,7 @@
 //         c) Add "!" to the end
 //         d) Display the result in the element with ID "outShout"
 //            using .innerHTML
-//
+
 //         Example: "hello" → "HELLO!"
 
 
@@ -43,7 +45,33 @@
 // STEP 3: Get the "Calculate Total" button by ID ("btnCalc")
 //         Add a click event listener.
 //         Inside the listener:
-
+document.getElementById("btnCalc").addEventListener('click', function(){
+    const toppings = document.getElementsByName("cb");
+    let price = 0;
+    for (let i=0; i<toppings.length; i++){
+        if (toppings[i].checked){
+            price = price + 0.50;
+        }
+    } 
+    const size = document.getElementsByName("rg");
+    for (let i=0; i<size.length; i++){
+        if (size[i].checked){
+            price = price + parseFloat(size[i].value);
+        }
+    } 
+    // price = price + parseFloat(document.getElementsByName("rg").checked.value);
+    let service = document.getElementById("serviceSelect").value;
+    if (service == "dinein"){
+        price = price + 0;
+    } else if (service == "takeout") {
+        price = price + 1.5;
+    } else if (service == "delivery") {
+        price = price + 3;
+    }
+    
+    let name = document.getElementById("myInput");
+    myPara.innerHTML = name+", your total is $"+price.toFixed(2);
+})
 //   a) Get the selected size price:
 //      Use document.getElementsByName("rg") to get all
 //      size radio buttons. Loop through them to find the
